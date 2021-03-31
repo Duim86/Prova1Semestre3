@@ -1,7 +1,5 @@
 package com.prova1.alexandre.model;
 
-import java.util.Objects;
-
 public class Filmes {
   private Long idFilme;
   private String nome;

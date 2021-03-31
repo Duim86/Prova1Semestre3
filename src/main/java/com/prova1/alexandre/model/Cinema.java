@@ -1,5 +1,6 @@
 package com.prova1.alexandre.model;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Cinema {
@@ -13,10 +14,11 @@ public class Cinema {
   private String bairro;
   private String cidade;
   private String estado;
+  private Filmes filme[];
 
-  public Cinema(Long idCinema, String nome, String rua, Long numero,
-                String bairro, String cidade,
-                String estado) {
+  // Constructor
+
+  public Cinema(Long idCinema, String nome, String rua, Long numero, String bairro, String cidade, String estado, Filmes[] filme) {
     this.idCinema = idCinema;
     this.nome = nome;
     this.rua = rua;
@@ -24,7 +26,14 @@ public class Cinema {
     this.bairro = bairro;
     this.cidade = cidade;
     this.estado = estado;
+    this.filme = filme;
   }
+
+  public Cinema() {
+  }
+
+  // Métodos
+
 
   public Long getIdCinema() {
     return idCinema;
@@ -90,6 +99,29 @@ public class Cinema {
     this.estado = estado;
   }
 
+  public Filmes[] getFilme() {
+    return filme;
+  }
+
+  public void setFilme(Filmes[] filme) {
+    this.filme = filme;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Cinema cinema = (Cinema) o;
+    return idCinema.equals(cinema.idCinema) && nome.equals(cinema.nome) && rua.equals(cinema.rua) && numero.equals(cinema.numero) && complemento.equals(cinema.complemento) && bairro.equals(cinema.bairro) && cidade.equals(cinema.cidade) && estado.equals(cinema.estado) && Arrays.equals(filme, cinema.filme);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = Objects.hash(idCinema, nome, rua, numero, complemento, bairro, cidade, estado);
+    result = 31 * result + Arrays.hashCode(filme);
+    return result;
+  }
+
   @Override
   public String toString() {
     return "Cinema{" +
@@ -101,19 +133,7 @@ public class Cinema {
             ", bairro='" + bairro + '\'' +
             ", cidade='" + cidade + '\'' +
             ", estado='" + estado + '\'' +
+            ", filme=" + Arrays.toString(filme) +
             '}';
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Cinema cinema = (Cinema) o;
-    return idCinema.equals(cinema.idCinema) && nome.equals(cinema.nome) && rua.equals(cinema.rua) && numero.equals(cinema.numero) && complemento.equals(cinema.complemento) && bairro.equals(cinema.bairro) && cidade.equals(cinema.cidade) && estado.equals(cinema.estado);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(idCinema, nome, rua, numero, complemento, bairro, cidade, estado);
   }
 }
